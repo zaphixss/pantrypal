@@ -39,3 +39,18 @@ class UserPreference(models.Model):
     title = models.CharField(max_length=255)
     preference_type = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Ingredient(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='ingredients',
+    )
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    quantity = models.PositiveIntegerField(default=1)
+    purchase_date = models.DateField()
+    expiry_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

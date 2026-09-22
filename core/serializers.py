@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Conversation, Message, UserPreference
+from .models import Conversation, Ingredient, Message, UserPreference
 
 
 class ConversationSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ('id', 'conversation', 'role', 'content', 'created_at')
-        read_only_fields = ('id', 'created_at')
+        read_only_fields = ('id', 'created_at', 'role', 'conversation')
 
 
 class UserPreferenceSerializer(serializers.ModelSerializer):
@@ -22,3 +22,20 @@ class UserPreferenceSerializer(serializers.ModelSerializer):
         model = UserPreference
         fields = ('id', 'user', 'title', 'preference_type', 'created_at')
         read_only_fields = ('id', 'user', 'created_at')
+
+
+class IngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ingredient
+        fields = (
+            'id',
+            'user',
+            'title',
+            'description',
+            'quantity',
+            'purchase_date',
+            'expiry_date',
+            'created_at',
+            'updated_at',
+        )
+        read_only_fields = ('id', 'user', 'created_at', 'updated_at')
